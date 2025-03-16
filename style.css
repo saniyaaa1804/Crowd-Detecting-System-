@@ -1,0 +1,97 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* Light background for better contrast */
+}
+
+/* Navbar Styles */
+.navbar {
+    margin-bottom: 20px;
+}
+
+.navbar-brand img {
+    height: 50px; /* Logo size */
+}
+
+.navbar-nav .nav-link {
+    color: white; /* Navbar link color */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffb400; /* Hover color for links */
+}
+
+/* Hero Section Styles */
+.hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.overlay {
+    position: relative;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 50px;
+    border-radius: 10px;
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: #ffb400;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #ff5722;
+}
+
+/* Container Styles */
+.container {
+    margin-top: 50px;
+}
+
+/* Density Display Styles */
+.density {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* Map Styles */
+#map {
+    height: 400px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+    }
+
+    .container {
+        width: 90%;
+    }
+
+    .density {
+        font-size: 1.2em; /* Adjust density font size for smaller screens */
+    }
+}

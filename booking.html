@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Ticket</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz23mXJ-kjIhW3X7OQwqiL8uUDc0tzaYM&callback=initMap"></script>
+    
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 30px;
+        }
+        #map {
+            height: 400px;
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">Train Booking</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">🏠 Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="dashboard.html">🚉 Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1>Book Your Ticket</h1>
+
+    <label for="from-station">Select From Station:</label>
+    <select id="from-station" class="form-control w-50 mx-auto" onchange="updateDetails()">
+        <option value="CST">Chhatrapati Shivaji Terminus</option>
+        <option value="Dadar">Dadar</option>
+        <option value="Bandra">Bandra</option>
+        <option value="Andheri">Andheri</option>
+        <option value="Borivali">Borivali</option>
+    </select>
+
+    <label for="to-station" class="mt-3">Select To Station:</label>
+    <select id="to-station" class="form-control w-50 mx-auto" onchange="updateDetails()">
+        <option value="CST">Chhatrapati Shivaji Terminus</option>
+        <option value="Dadar">Dadar</option>
+        <option value="Bandra">Bandra</option>
+        <option value="Andheri">Andheri</option>
+        <option value="Borivali">Borivali</option>
+    </select>
+
+    <div class="mt-3">
+        <strong>Distance: <span id="distance">0</span> km</strong>
+    </div>
+    <div class="mt-3">
+        <strong>Price: <span id="ticket-price">0</span> ₹</strong>
+    </div>
+    <div class="mt-3">
+        <strong>Estimated Time: <span id="travel-time">0</span> minutes</strong>
+    </div>
+
+    <button class="btn btn-primary mt-3" onclick="calculateDetails()">Calculate</button>
+    <button class="btn btn-secondary mt-3" onclick="goBack()">Go Back</button>
+    <button class="btn btn-success mt-4" onclick="bookTicket()">Book Ticket</button>
+
+    <div id="map"></div>
+
+    <script>
+        const stationData = {
+            "CST": { "Dadar": { distance: 12, price: 50, time: 15 }, "Bandra": { distance: 15, price: 60, time: 20 }, "Andheri": { distance: 20, price: 70, time: 25 }, "Borivali": { distance: 30, price: 90, time: 35 } },
+            "Dadar": { "CST": { distance: 12, price: 50, time: 15 }, "Bandra": { distance: 8, price: 40, time: 10 }, "Andheri": { distance: 15, price: 55, time: 20 }, "Borivali": { distance: 25, price: 80, time: 30 } },
+            "Bandra": { "CST": { distance: 15, price: 60, time: 20 }, "Dadar": { distance: 8, price: 40, time: 10 }, "Andheri": { distance: 10, price: 45, time: 15 }, "Borivali": { distance: 20, price: 70, time: 25 } },
+            "Andheri": { "CST": { distance: 20, price: 70, time: 25 }, "Dadar": { distance: 15, price: 55, time: 20 }, "Bandra": { distance: 10, price: 45, time: 15 }, "Borivali": { distance: 15, price: 60, time: 20 } },
+            "Borivali": { "CST": { distance: 30, price: 90, time: 35 }, "Dadar": { distance: 25, price: 80, time: 30 }, "Bandra": { distance: 20, price: 70, time: 25 }, "Andheri": { distance: 15, price: 60, time: 20 } }
+        };
+
+        function calculateDetails() {
+            let from = document.getElementById("from-station").value;
+            let to = document.getElementById("to-station").value;
+            if (from === to) {
+                alert("Please select different stations.");
+                return;
+            }
+            let data = stationData[from][to];
+            document.getElementById("distance").innerText = data.distance;
+            document.getElementById("ticket-price").innerText = data.price;
+            document.getElementById("travel-time").innerText = data.time;
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function bookTicket() {
+            alert("Ticket Booked Successfully!");
+        }
+    </script>
+</body>
+</html>
